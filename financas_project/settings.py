@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-n3b42*j@)tqyt&5u#ja@c4duqn*rrfgv=p--7ak8axj_t-!j^&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","192.168.15.12"]
+ALLOWED_HOSTS = ["localhost","192.168.15.12","helber.pythonanywhere.com"]
 
 
 # Application definition
@@ -119,6 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOR = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'autenticacao_app.Usuario'
 LOGIN_URL = "/autenticacao/login/"
