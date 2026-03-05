@@ -1,9 +1,23 @@
-const API_BASE_URL = "http://localhost:8000/api/transacoes/";
+const API_BASE_URL = "/api/transacoes/";
+
+function getCSRFToken() {
+    const name = "csrftoken";
+    const cookies = document.cookie.split(";");
+
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + "=")) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
 
 async function fetchApi(endpoint, options = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
     const headers = {
         "Content-Type": "application/json",
+        "X-CSRFToken": getCSRFToken(),
         ...options.headers,
     };
 
