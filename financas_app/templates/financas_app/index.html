@@ -31,9 +31,14 @@
             <span class="sm:hidden">Finanças</span>
         </div>
 
-        <button id="themeSwitch" class="text-xl">
-            <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
-        </button>
+        <div class="flex items-center gap-4">
+            <button id="themeSwitch" class="text-xl">
+                <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
+            </button>
+            <a href="{% url 'autenticacao_app:logout' %}" id="logout" class="text-2xl">
+                <i id="logoutIcon" class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
     </div>
 </nav>
 
