@@ -1,0 +1,52 @@
+:root {
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+[data-bs-theme="dark"] .table-light {
+    --bs-table-bg: #2b3035;
+    --bs-table-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.display-4 {
+    font-weight: 600;
+}
+
+#addExpenseBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 1050; 
+}
+
+#addExpenseBtn i {
+    font-size: 1.5rem;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(var(--bs-emphasis-color-rgb), 0.075);
+}
+
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+}

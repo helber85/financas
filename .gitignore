@@ -1,0 +1,114 @@
+# ==============================
+
+# PYTHON
+
+# ==============================
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Distribuição / build
+
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+
+*.log
+
+# Testes / coverage
+
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+
+# ==============================
+
+# DJANGO
+
+# ==============================
+
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media / uploads
+
+/media
+
+# Arquivos estáticos gerados
+
+/staticfiles
+
+# ==============================
+
+# ENVIRONMENT VARIABLES
+
+# ==============================
+
+.env
+.env.*
+*.env
+
+# ==============================
+
+# VIRTUAL ENVIRONMENTS
+
+# ==============================
+
+venv/
+env/
+ENV/
+.venv/
+
+# ==============================
+
+# EDITORES / IDE
+
+# ==============================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+
+# SISTEMA OPERACIONAL
+
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+# ==============================
+
+# MIGRATIONS CACHE
+
+# (mantém migrations mas ignora cache)
+
+# ==============================
+
+**/migrations/**pycache**/
