@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: Object.values(expensesByCategory),
                     backgroundColor: [
                         '#9763ff', '#36A2EB', '#FFCE56',
-                        '#4BC0C0', '#9966FF', '#FF9F40',
+                        '#4BC0C0', '#99ff66', '#FF9F40',
                         '#FF6384', '#C9CBCF', '#8BC34A',
                         '#00ACC1', '#F06292', '#FFA726'
                     ],
