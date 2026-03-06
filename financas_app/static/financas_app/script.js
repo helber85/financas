@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const expenseForm = document.getElementById('expenseForm');
     const expenseModalLabel = document.getElementById('expenseModalLabel');
     const expenseTableBody = document.getElementById('expenseTableBody');
+    const expenseCards = document.getElementById('expenseCards');
     const emptyState = document.getElementById('emptyState');
 
     const expenseId = document.getElementById('expenseId');
@@ -34,12 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const category = document.getElementById('category');
     const date = document.getElementById('date');
 
-    description.focus();
-    console.log(description)
-
     let expenses = [];
     let categoryChart;
     let savingsChart;
+    let expenseCardsList = [];
 
     // ===============================
     // MODAL
@@ -80,6 +79,49 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${day}/${month}/${year}`;
     }
 
+    function createCard(exp) {
+        const isPositive = exp.type === 'receita' || exp.type === '+poupanca';
+        const colorClass = isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+
+        return `
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 ml-2 mr-2 mb-4">
+                <!-- Topo -->
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-semibold text-lg">
+                            ${exp.description}
+                        </h3>
+
+                        <p class="text-sm text-gray-500">
+                            ${exp.category}
+                        </p>
+                    </div>
+                    <span class="font-bold text-red-600 dark:text-red-400 ${colorClass}">
+                        ${isPositive ? '+' : '-'} ${formatCurrency(exp.amount)}
+                    </span>
+                </div>
+                <!-- Info -->
+                <div class="mt-3 flex justify-between text-sm text-gray-500">
+                    <span class="flex items-center gap-1">
+                        <i class="bi bi-arrow-down-circle"></i>
+                        ${exp.type}
+                    </span>
+                    <span>
+                        ${formatDate(exp.date)}
+                    </span>
+                </div>
+                <!-- Ações -->
+                <div class="mt-4 flex gap-4">
+                    <button class="group relative w-full flex justify-center border border-transparent text-sm font-medium rounded-lg text-white bg-blue-900 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-lg shadow-blue-500/30 p-0" data-action="edit" data-id="${exp.id}">
+                        <i class="bi bi-pencil-fill text-lg"></i>
+                    </button>
+                    <button class="group relative w-full flex justify-center border border-transparent text-sm font-medium rounded-lg text-white bg-red-800 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors shadow-lg shadow-blue-500/30 p-0" data-action="delete" data-id="${exp.id}">
+                        <i class="bi bi-trash-fill text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
 
     // ===============================
     // DASHBOARD (HOISTED)
@@ -238,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderExpenses(filteredExpenses = expenses) {
 
         expenseTableBody.innerHTML = '';
+        expenseCards.innerHTML = '';
 
         if (filteredExpenses.length === 0) {
             emptyState.classList.remove('hidden');
@@ -246,6 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         filteredExpenses.forEach(exp => {
+
+            let a = createCard(exp);
+            expenseCards.insertAdjacentHTML("beforeend", a);
 
             const isPositive = exp.type === 'receita' || exp.type === '+poupanca';
             const colorClass = isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
@@ -330,8 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
             date: date.value
         };
 
-        console.log
-
         let success = false;
 
         if (id) {
@@ -380,7 +424,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    expenseTableBody.addEventListener('click', (e) => {
+    function handleActionClick(e) {
+
         const button = e.target.closest('button[data-action]');
         if (!button) return;
 
@@ -388,7 +433,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (action === 'edit') handleEditExpense(id);
         if (action === 'delete') handleDeleteExpense(id);
-    });
+    }
+
+    expenseTableBody.addEventListener('click', handleActionClick);
+    expenseCards.addEventListener('click', handleActionClick);
+
 
     // ===============================
     // FILTROS
